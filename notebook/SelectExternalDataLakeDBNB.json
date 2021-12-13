@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "true",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "4",
-				"spark.autotune.trackingId": "b658e33f-b679-4193-8951-ca4ba644daaa"
+				"spark.autotune.trackingId": "81823617-b0fc-4ee0-8aee-74b1bfe216b4"
 			}
 		},
 		"metadata": {
@@ -60,7 +60,7 @@
 					"df = spark.sql(\"SELECT * FROM `LakeDB1MV`.`covid_data`\")\n",
 					"df.show(10)"
 				],
-				"execution_count": 1
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
