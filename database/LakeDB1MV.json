@@ -1,0 +1,22 @@
+{
+	"name": "LakeDB1MV",
+	"properties": {
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Name": "LakeDB1MV",
+		"EntityType": "DATABASE",
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://adlssynapse@strssnesynapse.dfs.core.windows.net/LakeDB1MV",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "ssne-WorkspaceDefaultStorage"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
