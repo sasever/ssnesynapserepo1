@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "true",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "4",
-				"spark.autotune.trackingId": "d9e4b856-1929-497c-b62d-8976a8b35d85"
+				"spark.autotune.trackingId": "023f289d-20af-41f0-beaa-755210d12e73"
 			}
 		},
 		"metadata": {
@@ -57,9 +57,9 @@
 				},
 				"source": [
 					"%%sql\r\n",
-					"INSERT INTO `LakeDB1MV`.`customer` VALUES (1,'2021-02-18',1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);"
+					"INSERT INTO `LakeDB1MV`.`Customer` VALUES (1,'2021-02-18',1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);"
 				],
-				"execution_count": 1
+				"execution_count": 3
 			}
 		]
 	}
