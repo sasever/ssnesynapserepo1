@@ -1,0 +1,17 @@
+{
+	"name": "CosmosDBSynapseLinkServerless",
+	"properties": {
+		"content": {
+			"query": "\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents\n\n\n\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents where  UserName = 'Kamille.Monahan'\n\n\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents where [Address] = '91975 Newell Springs, Rohanfurt, Bahamas'\n\n\nSELECT count(distinct Country)\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents\n     \n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "default",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
