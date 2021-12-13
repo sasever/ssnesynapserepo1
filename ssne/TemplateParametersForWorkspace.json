@@ -11,6 +11,9 @@
 		"AzureSqlSSNEPADW_connectionString": {
 			"value": ""
 		},
+		"CosmosDbSSCOSNE_connectionString": {
+			"value": ""
+		},
 		"SQL_SSNESQL_connectionString": {
 			"value": ""
 		},
@@ -22,9 +25,6 @@
 		},
 		"ssne-WorkspaceDefaultSqlServer_connectionString": {
 			"value": ""
-		},
-		"CosmosDbSSCOSNE_properties_typeProperties_database": {
-			"value": "Web"
 		},
 		"STR_SSNE_ADLS_properties_typeProperties_url": {
 			"value": "https://strssne.dfs.core.windows.net"
