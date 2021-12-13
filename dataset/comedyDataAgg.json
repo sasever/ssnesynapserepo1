@@ -1,0 +1,26 @@
+{
+	"name": "comedyDataAgg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "STR_SSNE_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Movies",
+				"fileSystem": "sample"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	}
+}

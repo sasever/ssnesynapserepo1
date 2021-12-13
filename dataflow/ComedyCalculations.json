@@ -1,0 +1,62 @@
+{
+	"name": "ComedyCalculations",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Movie_txt",
+						"type": "DatasetReference"
+					},
+					"name": "ReadMoviesFile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "comedyDataAgg",
+						"type": "DatasetReference"
+					},
+					"name": "WritetoFile"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterYearAndGenreComedy"
+				},
+				{
+					"name": "AggregateComedyRatingsByYear"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          movie as string,",
+				"          title as string,",
+				"          genres as string,",
+				"          year as string,",
+				"          Rating as string,",
+				"          {Rotton Tomato} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ReadMoviesFile",
+				"ReadMoviesFile filter(toInteger(year) >= 1910 && toInteger(year) <= 2000 && rlike(genres, 'Comedy')) ~> FilterYearAndGenreComedy",
+				"FilterYearAndGenreComedy aggregate(groupBy(year),",
+				"     AverageComedyRating = avg(toInteger(Rating)),",
+				"          MaxComedyRating = max(toInteger(Rating)),",
+				"          MinComedyRating = min(toInteger(Rating))) ~> AggregateComedyRatingsByYear",
+				"AggregateComedyRatingsByYear sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> WritetoFile"
+			]
+		}
+	}
+}
