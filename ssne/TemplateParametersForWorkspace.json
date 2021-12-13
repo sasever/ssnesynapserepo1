@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "ssne"
+		},
+		"AzureSqlSSNEP1_connectionString": {
+			"value": ""
+		},
+		"SQL_SSNESQL_connectionString": {
+			"value": ""
+		},
+		"STR_SSNE1_connectionString": {
+			"value": ""
+		},
+		"STR_SSNE_ADLS_accountKey": {
+			"value": ""
+		},
+		"ssne-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"STR_SSNE_ADLS_properties_typeProperties_url": {
+			"value": "https://strssne.dfs.core.windows.net"
+		},
+		"ssne-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://strssnesynapse.dfs.core.windows.net"
+		}
+	}
+}
