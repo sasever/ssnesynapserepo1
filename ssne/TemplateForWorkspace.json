@@ -746,6 +746,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SelectExternalDataLakeDB')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [id]\n,[updated]\n,[confirmed]\n,[confirmed_change]\n,[deaths]\n,[deaths_change]\n,[recovered]\n,[recovered_change]\n--,[latitude]\n--,[longitude]\n,[iso2]\n,[iso3]\n,[country_region]\n,[admin_region_1]\n,[iso_subdivision]\n,[admin_region_2]\n,[load_time]\n FROM [LakeDB1MV].[dbo].[covid_data]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "LakeDB1MV",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/CosmosDBSynapseLinkNB')]",
 			"type": "Microsoft.Synapse/workspaces/notebooks",
 			"apiVersion": "2019-06-01-preview",
@@ -766,7 +786,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "3203c22d-fbcb-4564-964b-559ecaada261"
+						"spark.autotune.trackingId": "0c22758d-5b6d-4d55-ab61-5a8b3af0f189"
 					}
 				},
 				"metadata": {
@@ -864,6 +884,94 @@
 						],
 						"outputs": [],
 						"execution_count": 3
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SelectExternalDataLakeDBNB')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "ssnesynapSpark",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 1,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "true",
+						"spark.dynamicAllocation.minExecutors": "1",
+						"spark.dynamicAllocation.maxExecutors": "4",
+						"spark.autotune.trackingId": "81823617-b0fc-4ee0-8aee-74b1bfe216b4"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/757c4165-0823-49f7-9678-5a85fe5e17cc/resourceGroups/rgssnesynapse/providers/Microsoft.Synapse/workspaces/ssne/bigDataPools/ssnesynapSpark",
+						"name": "ssnesynapSpark",
+						"type": "Spark",
+						"endpoint": "https://ssne.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/ssnesynapSpark",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 3,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"microsoft": {
+								"language": "python"
+							}
+						},
+						"source": [
+							"%%pyspark\n",
+							"df = spark.sql(\"SELECT * FROM `LakeDB1MV`.`covid_data`\")\n",
+							"df.show(10)"
+						],
+						"outputs": [],
+						"execution_count": 2
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						],
+						"outputs": [],
+						"execution_count": null
 					}
 				]
 			},
