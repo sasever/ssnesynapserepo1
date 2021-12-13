@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "true",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "4",
-				"spark.autotune.trackingId": "c4d041d8-9736-461d-bb8c-6266c1ce8655"
+				"spark.autotune.trackingId": "f3bb6798-8b9d-4ac5-836c-04bfa4317268"
 			}
 		},
 		"metadata": {
@@ -58,7 +58,7 @@
 					"    .option(\"spark.cosmos.container\", \"WebsiteData\")\\\r\n",
 					"    .load()"
 				],
-				"execution_count": 1
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -86,7 +86,7 @@
 					"    spark.cosmos.container 'WebsiteData'\r\n",
 					")"
 				],
-				"execution_count": 2
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -110,7 +110,7 @@
 					"\r\n",
 					"select * from WebsiteData where    UserName = 'Kamille.Monahan'"
 				],
-				"execution_count": 3
+				"execution_count": null
 			}
 		]
 	}
