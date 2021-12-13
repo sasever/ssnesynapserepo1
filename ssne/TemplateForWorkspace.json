@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ssne-WorkspaceDefaultSqlServer'"
 		},
+		"CosmosDbSSCOSNE_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Web"
+		},
 		"STR_SSNE_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://strssne.dfs.core.windows.net"
@@ -495,6 +499,26 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDbSSCOSNE')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "CosmosDb",
+				"typeProperties": {
+					"accountEndpoint": "https://sscosne.documents.azure.com:443/",
+					"database": "[parameters('CosmosDbSSCOSNE_properties_typeProperties_database')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/SQL_SSNESQL')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
@@ -703,6 +727,148 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDBSynapseLinkServerless')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents\n\n\n\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents where  UserName = 'Kamille.Monahan'\n\n\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents where [Address] = '91975 Newell Springs, Rohanfurt, Bahamas'\n\n\nSELECT count(distinct Country)\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents\n     \n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "default",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDBSynapseLinkNB')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "ssnesynapSpark",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 1,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "true",
+						"spark.dynamicAllocation.minExecutors": "1",
+						"spark.dynamicAllocation.maxExecutors": "4",
+						"spark.autotune.trackingId": "eca20233-28b2-43ac-b9c0-7850fdf1f036"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/757c4165-0823-49f7-9678-5a85fe5e17cc/resourceGroups/rgssnesynapse/providers/Microsoft.Synapse/workspaces/ssne/bigDataPools/ssnesynapSpark",
+						"name": "ssnesynapSpark",
+						"type": "Spark",
+						"endpoint": "https://ssne.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/ssnesynapSpark",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 3,
+						"cores": 8,
+						"memory": 56,
+						"automaticScaleJobs": true
+					},
+					"sessionKeepAliveTimeout": 30
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {},
+						"source": [
+							"# To select a preferred list of regions in a multi-region Azure Cosmos DB account, add .option(\"spark.cosmos.preferredRegions\", \"<Region1>,<Region2>\")\r\n",
+							"\r\n",
+							"df = spark.read.format(\"cosmos.olap\")\\\r\n",
+							"    .option(\"spark.synapse.linkedService\", \"CosmosDbSSCOSNE\")\\\r\n",
+							"    .option(\"spark.cosmos.container\", \"WebsiteData\")\\\r\n",
+							"    .load()"
+						],
+						"outputs": [],
+						"execution_count": 2
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"microsoft": {
+								"language": "sparksql"
+							}
+						},
+						"source": [
+							"%%sql\r\n",
+							"-- To select a preferred list of regions in a multi-region Azure Cosmos DB account, add spark.cosmos.preferredRegions '<Region1>,<Region2>' in the config options\r\n",
+							"\r\n",
+							"create table WebsiteData using cosmos.olap options (\r\n",
+							"    spark.synapse.linkedService 'CosmosDbSSCOSNE',\r\n",
+							"    spark.cosmos.container 'WebsiteData'\r\n",
+							")"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"microsoft": {
+								"language": "sparksql"
+							}
+						},
+						"source": [
+							"%%sql\r\n",
+							"\r\n",
+							"select * from WebsiteData where    UserName = 'Kamille.Monahan'"
+						],
+						"outputs": [],
+						"execution_count": null
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/LakeDB1MV')]",
 			"type": "Microsoft.Synapse/workspaces/databases",
 			"apiVersion": "2019-06-01-preview",
@@ -755,6 +921,30 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/default/CosmosDbSSCOSNE_ssneHTAB')]",
+			"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"privateLinkResourceId": "/subscriptions/757c4165-0823-49f7-9678-5a85fe5e17cc/resourceGroups/cosmosne/providers/Microsoft.DocumentDb/databaseAccounts/sscosne",
+				"groupId": "Sql"
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/managedVirtualNetworks/default')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/default/CosmosDbSSCOSNE_ssneSQL')]",
+			"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"privateLinkResourceId": "/subscriptions/757c4165-0823-49f7-9678-5a85fe5e17cc/resourceGroups/cosmosne/providers/Microsoft.DocumentDb/databaseAccounts/sscosne",
+				"groupId": "Analytical"
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/managedVirtualNetworks/default')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/default/PE-AzureSQLSSNEP1')]",
@@ -848,26 +1038,6 @@
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/managedVirtualNetworks/default')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/CosmosDBSynapseLinkServerless')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents\n\n\n\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents where  UserName = 'Kamille.Monahan'\n\n\nSELECT TOP 10 *\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents where [Address] = '91975 Newell Springs, Rohanfurt, Bahamas'\n\n\nSELECT count(distinct Country)\nFROM OPENROWSET( \n       'CosmosDB',\n       'Account=sscosne;Database=Web;Key=WbwwrAAiyoI43slHttgPTzaBTwd3xE19ceedVWrwkLTKx6IJKc3tyixFvEfvvt73Qf2xdYdXH5nrB192Nt8H2A==',\n       WebsiteData) as documents\n     \n",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "default",
-						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
 		}
 	]
 }
