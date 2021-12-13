@@ -8,6 +8,9 @@
 		"AzureSqlSSNEP1_connectionString": {
 			"value": ""
 		},
+		"AzureSqlSSNEPADW_connectionString": {
+			"value": ""
+		},
 		"SQL_SSNESQL_connectionString": {
 			"value": ""
 		},
