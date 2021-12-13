@@ -786,7 +786,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "91a00800-fccf-425c-a0f7-e327eef397e9"
+						"spark.autotune.trackingId": "dc14c604-ddf2-4dea-9798-6eb6111aca78"
 					}
 				},
 				"metadata": {
@@ -811,12 +811,15 @@
 						"sparkVersion": "3.1",
 						"nodeCount": 3,
 						"cores": 8,
-						"memory": 56
-					}
+						"memory": 56,
+						"automaticScaleJobs": true
+					},
+					"sessionKeepAliveTimeout": 30
 				},
 				"cells": [
 					{
 						"cell_type": "code",
+						"metadata": {},
 						"source": [
 							"# To select a preferred list of regions in a multi-region Azure Cosmos DB account, add .option(\"spark.cosmos.preferredRegions\", \"<Region1>,<Region2>\")\r\n",
 							"\r\n",
@@ -907,7 +910,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "a7c05162-8164-47e8-97de-88fd67a8b123"
+						"spark.autotune.trackingId": "9984ab7c-4fb3-4cce-9dad-4569336efe1e"
 					}
 				},
 				"metadata": {
@@ -932,10 +935,8 @@
 						"sparkVersion": "3.1",
 						"nodeCount": 3,
 						"cores": 8,
-						"memory": 56,
-						"automaticScaleJobs": true
-					},
-					"sessionKeepAliveTimeout": 30
+						"memory": 56
+					}
 				},
 				"cells": [
 					{
