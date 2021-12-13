@@ -1,0 +1,17 @@
+{
+	"name": "SelectExternalDataLakeDB",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [id]\n,[updated]\n,[confirmed]\n,[confirmed_change]\n,[deaths]\n,[deaths_change]\n,[recovered]\n,[recovered_change]\n--,[latitude]\n--,[longitude]\n,[iso2]\n,[iso3]\n,[country_region]\n,[admin_region_1]\n,[iso_subdivision]\n,[admin_region_2]\n,[load_time]\n FROM [LakeDB1MV].[dbo].[covid_data]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "LakeDB1MV",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
