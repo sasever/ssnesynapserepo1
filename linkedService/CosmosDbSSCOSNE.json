@@ -1,0 +1,15 @@
+{
+	"name": "CosmosDbSSCOSNE",
+	"properties": {
+		"annotations": [],
+		"type": "CosmosDb",
+		"typeProperties": {
+			"accountEndpoint": "https://sscosne.documents.azure.com:443/",
+			"database": "Web"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
