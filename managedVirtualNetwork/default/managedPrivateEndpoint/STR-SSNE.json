@@ -1,0 +1,7 @@
+{
+	"name": "STR-SSNE",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/757c4165-0823-49f7-9678-5a85fe5e17cc/resourceGroups/rgssnesynapse/providers/Microsoft.Storage/storageAccounts/strssne",
+		"groupId": "dfs"
+	}
+}
