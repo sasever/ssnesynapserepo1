@@ -789,6 +789,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SelectExternalDataLakeDBCustomer')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [CustomerId]\n,[CustomerTypeId]\n,[ResponsibilityCenterId]\n,[LedgerId]\n--,[LedgerAccountNumber]\n,[CustomerNote]\n,[PartyId]\n,[GlobalLocationNumber]\n FROM [LakeDB1MV].[dbo].[Customer_2]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "LakeDB1MV",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/CosmosDBSynapseLinkNB')]",
 			"type": "Microsoft.Synapse/workspaces/notebooks",
 			"apiVersion": "2019-06-01-preview",
@@ -930,7 +950,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "2e2a1536-d76a-4c39-a31f-83bd334a08ef"
+						"spark.autotune.trackingId": "04fc5d4b-86f5-43c6-ba1d-bfb5cdde94c7"
 					}
 				},
 				"metadata": {
@@ -971,14 +991,14 @@
 						},
 						"source": [
 							"%%sql\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (1,1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (2,1021,557,102,'Marties Bucks','Martin Hoffman',90210,761);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (3,1000,557,103,'Happyness Inc','Helga Koch',90660,486);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (4,1012,557,104,'Edemame Co.','Casey Bruckar',90780,561);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (5,1022,557,105,'Oh-Lala Bacery','Laura May',90890,356);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (6,1021,557,106,'Careless Whisperers','Waldemar Fisar',90743,262);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (7,1021,557,107,'Moniga','Monica Garnelle',90345,634);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (8,1022,557,108,'Mambo','Cesar Jose Tuan',90364,477);"
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (1,to_date('2020-10-23', 'yyyy-MM-dd'),1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (2,to_date('2020-11-13', 'yyyy-MM-dd'),1021,557,102,'Marties Bucks','Martin Hoffman',90210,761);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (3,to_date('2020-12-21', 'yyyy-MM-dd'),1000,557,103,'Happyness Inc','Helga Koch',90660,486);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (4,to_date('2021-01-02', 'yyyy-MM-dd'),1012,557,104,'Edemame Co.','Casey Bruckar',90780,561);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (5,to_date('2021-02-03', 'yyyy-MM-dd'),1022,557,105,'Oh-Lala Bacery','Laura May',90890,356);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (6,to_date('2021-02-12', 'yyyy-MM-dd'),1021,557,106,'Careless Whisperers','Waldemar Fisar',90743,262);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (7,to_date('2021-06-14', 'yyyy-MM-dd'),1021,557,107,'Moniga','Monica Garnelle',90345,634);\r\n",
+							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (8,to_date('2021-10-30', 'yyyy-MM-dd'),1022,557,108,'Mambo','Cesar Jose Tuan',90364,477);"
 						],
 						"outputs": [],
 						"execution_count": 8
@@ -1237,8 +1257,8 @@
 									"Properties": {
 										"path": "abfss://adlssynapse@strssnesynapse.dfs.core.windows.net/LakeDB1MV/Branch",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -1434,8 +1454,8 @@
 									"Properties": {
 										"path": "abfss://adlssynapse@strssnesynapse.dfs.core.windows.net/LakeDB1MV/Customer_2",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
