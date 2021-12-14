@@ -11,6 +11,9 @@
 		"AzureSqlSSNEPADW_connectionString": {
 			"value": ""
 		},
+		"CosmosDbNEDENE_connectionString": {
+			"value": ""
+		},
 		"CosmosDbSSCOSNE_connectionString": {
 			"value": ""
 		},
