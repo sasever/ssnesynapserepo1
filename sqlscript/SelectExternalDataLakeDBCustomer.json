@@ -1,0 +1,17 @@
+{
+	"name": "SelectExternalDataLakeDBCustomer",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [CustomerId]\n,[CustomerTypeId]\n,[ResponsibilityCenterId]\n,[LedgerId]\n,[LedgerAccountNumber]\n,[CustomerNote]\n,[PartyId]\n,[GlobalLocationNumber]\n FROM [LakeDB1MV].[dbo].[Customer_2]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "LakeDB1MV",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
