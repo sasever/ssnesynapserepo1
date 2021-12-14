@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "true",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "4",
-				"spark.autotune.trackingId": "10c5cc03-4b04-4a17-8cf2-903e609c4a61"
+				"spark.autotune.trackingId": "a2b93f1a-158d-4198-a07d-dc731fd72fd6"
 			}
 		},
 		"metadata": {
@@ -53,13 +53,44 @@
 				"metadata": {
 					"microsoft": {
 						"language": "sparksql"
-					}
+					},
+					"collapsed": false
 				},
 				"source": [
 					"%%sql\r\n",
-					"INSERT INTO `LakeDB1MV`.`Customer` VALUES (1,'2021-02-18',1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);"
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (1,1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (2,1021,557,102,'Marties Bucks','Martin Hoffman',90210,761);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (3,1000,557,103,'Happyness Inc','Helga Koch',90660,486);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (4,1012,557,104,'Edemame Co.','Casey Bruckar',90780,561);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (5,1022,557,105,'Oh-Lala Bacery','Laura May',90890,356);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (6,1021,557,106,'Careless Whisperers','Waldemar Fisar',90743,262);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (7,1021,557,107,'Moniga','Monica Garnelle',90345,634);\r\n",
+					"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (8,1022,557,108,'Mambo','Cesar Jose Tuan',90364,477);"
 				],
-				"execution_count": 4
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "sparksql"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%sql\r\n",
+					"SELECT * FROM `LakeDB1MV`.`Customer_2`"
+				],
+				"execution_count": 9
 			}
 		]
 	}
