@@ -1,0 +1,23 @@
+{
+	"name": "LakeDB2",
+	"properties": {
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true,
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}"
+		},
+		"Name": "LakeDB2",
+		"EntityType": "DATABASE",
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://adlssynapse@strssnesynapse.dfs.core.windows.net/LakeDB2",
+			"Properties": {
+				"FormatType": "parquet",
+				"LinkedServiceName": "ssne-WorkspaceDefaultStorage"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
