@@ -829,7 +829,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "f3bb6798-8b9d-4ac5-836c-04bfa4317268"
+						"spark.autotune.trackingId": "63b92fbd-9b46-44a5-895a-7b7d381e17f0"
 					}
 				},
 				"metadata": {
@@ -854,12 +854,15 @@
 						"sparkVersion": "3.1",
 						"nodeCount": 3,
 						"cores": 8,
-						"memory": 56
-					}
+						"memory": 56,
+						"automaticScaleJobs": true
+					},
+					"sessionKeepAliveTimeout": 30
 				},
 				"cells": [
 					{
 						"cell_type": "code",
+						"metadata": {},
 						"source": [
 							"# To select a preferred list of regions in a multi-region Azure Cosmos DB account, add .option(\"spark.cosmos.preferredRegions\", \"<Region1>,<Region2>\")\r\n",
 							"\r\n",
@@ -950,7 +953,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "04fc5d4b-86f5-43c6-ba1d-bfb5cdde94c7"
+						"spark.autotune.trackingId": "627ff471-3079-49e0-ae23-920adc0094f3"
 					}
 				},
 				"metadata": {
@@ -975,13 +978,24 @@
 						"sparkVersion": "3.1",
 						"nodeCount": 3,
 						"cores": 8,
-						"memory": 56
-					}
+						"memory": 56,
+						"automaticScaleJobs": true
+					},
+					"sessionKeepAliveTimeout": 30
 				},
 				"cells": [
 					{
 						"cell_type": "code",
 						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
 							"microsoft": {
 								"language": "sparksql"
 							},
@@ -989,17 +1003,17 @@
 						},
 						"source": [
 							"%%sql\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (1,to_date('2020-10-23', 'yyyy-MM-dd'),1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (2,to_date('2020-11-13', 'yyyy-MM-dd'),1021,557,102,'Marties Bucks','Martin Hoffman',90210,761);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (3,to_date('2020-12-21', 'yyyy-MM-dd'),1000,557,103,'Happyness Inc','Helga Koch',90660,486);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (4,to_date('2021-01-02', 'yyyy-MM-dd'),1012,557,104,'Edemame Co.','Casey Bruckar',90780,561);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (5,to_date('2021-02-03', 'yyyy-MM-dd'),1022,557,105,'Oh-Lala Bacery','Laura May',90890,356);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (6,to_date('2021-02-12', 'yyyy-MM-dd'),1021,557,106,'Careless Whisperers','Waldemar Fisar',90743,262);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (7,to_date('2021-06-14', 'yyyy-MM-dd'),1021,557,107,'Moniga','Monica Garnelle',90345,634);\r\n",
-							"INSERT INTO `LakeDB1MV`.`Customer_2` VALUES (8,to_date('2021-10-30', 'yyyy-MM-dd'),1022,557,108,'Mambo','Cesar Jose Tuan',90364,477);"
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (1,cast('2020-10-23' as date),1022,557,101,'Tailspin Toys','Waldemar Fisar',90410,466);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (2,cast('2020-11-13' as date),1021,557,102,'Marties Bucks','Martin Hoffman',90210,761);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (3,cast('2020-12-21' as date),1000,557,103,'Happyness Inc','Helga Koch',90660,486);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (4,cast('2021-01-02' as date),1012,557,104,'Edemame Co.','Casey Bruckar',90780,561);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (5,cast('2021-02-03' as date),1022,557,105,'Oh-Lala Bacery','Laura May',90890,356);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (6,cast('2021-02-12' as date),1021,557,106,'Careless Whisper','Evelyn Fisher',90743,262);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (7,cast('2021-06-14' as date),1021,557,107,'Moniga','Monica Garnelle',90345,634);\r\n",
+							"INSERT INTO `LakeDB2`.`Customer` VALUES (8,cast('2021-10-30' as date),1022,557,108,'Mambo','Cesar Jose Tuan',90364,477);"
 						],
 						"outputs": [],
-						"execution_count": 8
+						"execution_count": 10
 					},
 					{
 						"cell_type": "code",
@@ -1020,10 +1034,10 @@
 						},
 						"source": [
 							"%%sql\r\n",
-							"SELECT * FROM `LakeDB1MV`.`Customer_2`"
+							"SELECT * FROM `LakeDB2`.`Customer`"
 						],
 						"outputs": [],
-						"execution_count": 9
+						"execution_count": null
 					}
 				]
 			},
@@ -1050,7 +1064,7 @@
 						"spark.dynamicAllocation.enabled": "true",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "4",
-						"spark.autotune.trackingId": "81823617-b0fc-4ee0-8aee-74b1bfe216b4"
+						"spark.autotune.trackingId": "881612a8-1781-4d42-9dbb-6437f1eeb2d7"
 					}
 				},
 				"metadata": {
@@ -1075,8 +1089,10 @@
 						"sparkVersion": "3.1",
 						"nodeCount": 3,
 						"cores": 8,
-						"memory": 56
-					}
+						"memory": 56,
+						"automaticScaleJobs": true
+					},
+					"sessionKeepAliveTimeout": 30
 				},
 				"cells": [
 					{
