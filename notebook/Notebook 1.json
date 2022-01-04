@@ -1,0 +1,62 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "b3d4666f-1ede-40d4-9dd8-d85ee00f4583"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"import sys\r\n",
+					"from operator import add\r\n",
+					"from pyspark.sql import SparkSession, Row\r\n",
+					" \r\n",
+					"spark = SparkSession\\\r\n",
+					" .builder\\\r\n",
+					" .appName(\"PythonWordCount\")\\\r\n",
+					" .getOrCreate()\r\n",
+					" \r\n",
+					"data = [Row(col1='pyspark and spark', col2=1), Row(col1='pyspark', col2=2), Row(col1='spark vs hadoop', col2=2), Row(col1='spark', col2=2), Row(col1='hadoop', col2=2)]\r\n",
+					"df = spark.createDataFrame(data)\r\n",
+					"lines = df.rdd.map(lambda r: r[0])\r\n",
+					" \r\n",
+					"counters = lines.flatMap(lambda x: x.split(' ')) \\\r\n",
+					" .map(lambda x: (x, 1)) \\\r\n",
+					" .reduceByKey(add)\r\n",
+					" \r\n",
+					"output = counters.collect()\r\n",
+					"sortedCollection = sorted(output, key = lambda r: r[1], reverse = True)\r\n",
+					" \r\n",
+					"for (word, count) in sortedCollection:\r\n",
+					" print(\"%s: %i\" % (word, count))"
+				],
+				"execution_count": null
+			}
+		]
+	}
+}
