@@ -1,0 +1,17 @@
+{
+	"name": "ListDeploymentItems",
+	"properties": {
+		"content": {
+			"query": "select  SCHEMA_NAME(a.schema_id) AS [Schema],a.name, a.type_desc, a.* from sys.all_objects a   \nwhere 1=1 and (a.name COLLATE Latin1_General_CS_AS  like '%DELTA_TABLE%' \n               or a.name COLLATE Latin1_General_CS_AS  like '%PII%' )  ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ssnesynapseDSQL",
+				"poolName": "ssnesynapseDSQL"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
