@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "DROP TABLE [ETL].[DELTA_TABLE_2]\nGO\nDROP TABLE [ETL].[DELTA_TABLE]\nGO\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ssnesynapseDSQL",
+				"poolName": "ssnesynapseDSQL"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
