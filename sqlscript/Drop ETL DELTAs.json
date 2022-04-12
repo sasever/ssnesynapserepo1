@@ -1,5 +1,5 @@
 {
-	"name": "SQL script 1",
+	"name": "Drop ETL DELTAs",
 	"properties": {
 		"content": {
 			"query": "DROP TABLE [ETL].[DELTA_TABLE_2]\nGO\nDROP TABLE [ETL].[DELTA_TABLE]\nGO\n",
