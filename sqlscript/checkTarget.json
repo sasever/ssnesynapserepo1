@@ -1,0 +1,17 @@
+{
+	"name": "checkTarget",
+	"properties": {
+		"content": {
+			"query": "select s.name as SCHEMA_NAME,t.name as TABLE_NAME  \nfrom sys.tables t \njoin sys.schemas s on s.schema_id=t.schema_id",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "targetTest",
+				"poolName": "targetTest"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
