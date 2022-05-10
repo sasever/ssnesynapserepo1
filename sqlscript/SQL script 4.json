@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 4",
+	"properties": {
+		"content": {
+			"query": "SET ANSI_NULLS ON\nGO\nSET QUOTED_IDENTIFIER ON\nGO\n\nCREATE TABLE [dbo].[SomePIIDDM]\n( \n\t[Id] [int]  NOT NULL,\n\t[FirstName] [varchar](50)  NOT NULL,\n\t[MiddleName] [varchar](50)  NULL,\n\t[LastName] [varchar](50)  NOT NULL,\n\t[Email] [varchar](500)  NULL,\n\t[Address1] [varchar](100)  NULL,\n\t[Address2] [varchar](100)  NULL,\n\t[PostCode] [varchar](10)  NULL,\n\t[DateOfBirth] [date]  NOT NULL,\n\t[Salary] [int]  NULL\n)\nWITH\n(\n\tDISTRIBUTION = ROUND_ROBIN,\n\tCLUSTERED COLUMNSTORE INDEX\n)\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ssnesynapseDSQL",
+				"poolName": "ssnesynapseDSQL"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
