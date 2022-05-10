@@ -1,0 +1,17 @@
+{
+	"name": "DropSomeFromTarget",
+	"properties": {
+		"content": {
+			"query": "DROP TABLE [ETL].[mins]\nGO\nDROP TABLE [dbo].[dept_duser]\nGO\nDROP TABLE [PII].[SomePIIDDM]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "targetTest",
+				"poolName": "targetTest"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
