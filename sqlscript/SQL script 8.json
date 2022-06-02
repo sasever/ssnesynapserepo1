@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 8",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [CustomerId]\n,[CustomerEstablishedDate]\n,[CustomerTypeId]\n,[ResponsibilityCenterId]\n,[LedgerId]\n,[LedgerAccountNumber]\n,[CustomerNote]\n,[PartyId]\n,[GlobalLocationNumber]\n FROM [LakeDB2].[dbo].[Customer]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "LakeDB2",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

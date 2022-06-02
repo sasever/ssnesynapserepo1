@@ -1,7 +1,7 @@
 {
-	"name": "LakeDB2",
+	"name": "LakeDBPur",
 	"properties": {
-		"Name": "LakeDB2",
+		"Name": "LakeDBPur",
 		"EntityType": "DATABASE",
 		"Origin": {
 			"Type": "SPARK"
@@ -12,9 +12,9 @@
 		},
 		"Source": {
 			"Provider": "ADLS",
-			"Location": "abfss://adlssynapse@strssnesynapse.dfs.core.windows.net/LakeDB2",
+			"Location": "abfss://adlssynapse@strssnesynapse.dfs.core.windows.net/LakeDBPur",
 			"Properties": {
-				"FormatType": "parquet",
+				"FormatType": "csv",
 				"LinkedServiceName": "ssne-WorkspaceDefaultStorage"
 			}
 		}
