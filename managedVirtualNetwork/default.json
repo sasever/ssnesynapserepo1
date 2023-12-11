@@ -1,4 +1,8 @@
 {
-	"name": "default",
-	"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks"
+	"__zone_symbol__state": true,
+	"__zone_symbol__value": {
+		"name": "default",
+		"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks"
+	},
+	"name": "default"
 }
